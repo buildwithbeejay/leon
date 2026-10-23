@@ -1,19 +1,24 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import React, { useState } from 'react';
-import { motion, AnimatePresence, type Variants } from 'framer-motion';
-import confetti from 'canvas-confetti';
-import { 
-  Copy, Check, ExternalLink, Volume2, VolumeX, Send, 
-  Flame, ShieldCheck, Sparkles, ChevronLeft, ChevronRight, Download, Menu, X, Maximize2
-} from 'lucide-react';
-import { soundEffects } from './utils/audio';
+import confetti from "canvas-confetti";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
+import {
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Copy,
+  Download,
+  ExternalLink,
+  Maximize2,
+  Menu,
+  Send,
+  Volume2,
+  VolumeX,
+  X,
+} from "lucide-react";
+import { useState } from "react";
+import { soundEffects } from "./utils/audio";
 
 // Verified Contract Address for $LEON on Solana
-const CONTRACT_ADDRESS = "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosbray";
+const CONTRACT_ADDRESS = "";
 
 // User provided Hero Image
 const HERO_IMAGE = "/assets/aistudio/IMG_2433_1c47d950.PNG";
@@ -33,11 +38,11 @@ const STEP_4_IMG = "/assets/aistudio/IMG_2491.JPG_9bdd6538.jpeg"; // Arcade Swap
 // Reusable scroll fade-up animation variants
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.55, ease: "easeOut" } 
-  }
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: "easeOut" },
+  },
 };
 
 const staggerContainer: Variants = {
@@ -46,9 +51,9 @@ const staggerContainer: Variants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.05
-    }
-  }
+      delayChildren: 0.05,
+    },
+  },
 };
 
 export default function App() {
@@ -66,7 +71,7 @@ export default function App() {
       desc: "Download Phantom or Solflare wallet from the App Store, Google Play, or as a browser extension. Keep your secret recovery phrase secure and never share it.",
       img: STEP_1_IMG,
       actionText: "Get Phantom Wallet",
-      actionUrl: "https://phantom.app/"
+      actionUrl: "https://phantom.app/",
     },
     {
       num: "02",
@@ -74,7 +79,7 @@ export default function App() {
       desc: "Fund your wallet with Solana (SOL). You can buy SOL directly inside Phantom via MoonPay, or transfer from exchanges like Binance, Coinbase, or Kraken.",
       img: STEP_2_IMG,
       actionText: "Buy SOL via Phantom",
-      actionUrl: "https://solana.com/"
+      actionUrl: "https://solana.com/",
     },
     {
       num: "03",
@@ -82,7 +87,7 @@ export default function App() {
       desc: "Open Raydium (raydium.io) or Jupiter (jup.ag) in your browser. Connect your Solana wallet and make sure you're connected to Solana Mainnet.",
       img: STEP_3_IMG,
       actionText: "Open Raydium DEX",
-      actionUrl: "https://raydium.io/swap/"
+      actionUrl: "https://raydium.io/swap/",
     },
     {
       num: "04",
@@ -90,8 +95,8 @@ export default function App() {
       desc: "Paste the $LEON contract address into the token field, select the amount of SOL to swap, set slippage to 0.5%–1%, and confirm the transaction in your wallet.",
       img: STEP_4_IMG,
       actionText: "Swap on Raydium",
-      actionUrl: "https://raydium.io/swap/"
-    }
+      actionUrl: "https://raydium.io/swap/",
+    },
   ];
 
   // Official $LEON Artworks & Community Vault
@@ -113,7 +118,7 @@ export default function App() {
       confetti({
         particleCount: 50,
         spread: 60,
-        origin: { y: 0.6 }
+        origin: { y: 0.6 },
       });
     } catch {
       // Ignored
@@ -132,33 +137,31 @@ export default function App() {
     setMobileMenuOpen(false);
     const elem = document.getElementById(id);
     if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
+      elem.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
     <div className="min-h-screen bg-[#0b0604] text-[#F3EFEA] font-sans selection:bg-[#14f195] selection:text-[#0b0604] overflow-x-hidden">
-      
       {/* NAVBAR: RESPONSIVE FOR MOBILE, TABLET & DESKTOP */}
-      <motion.header 
+      <motion.header
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="fixed top-0 inset-x-0 z-50 bg-[#0b0604]/90 backdrop-blur-md border-b border-[#14f195]/20"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
-          
           {/* Brand Logo */}
           <a href="#" className="flex items-center gap-2.5 group shrink-0">
-            <motion.div 
+            <motion.div
               whileHover={{ rotate: 10, scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-[#14f195]/50 bg-black"
             >
-              <img 
-                src={HERO_IMAGE} 
-                alt="$LEON" 
-                className="w-full h-full object-cover object-[69%_28%]" 
+              <img
+                src={HERO_IMAGE}
+                alt="$LEON"
+                className="w-full h-full object-cover object-[69%_28%]"
               />
             </motion.div>
             <span className="font-extrabold text-lg sm:text-xl tracking-wider uppercase font-mono text-white group-hover:text-[#14f195] transition-colors">
@@ -168,19 +171,34 @@ export default function App() {
 
           {/* Navigation Links (Tablet & Desktop) */}
           <nav className="hidden md:flex items-center gap-5 lg:gap-8 text-xs font-bold uppercase tracking-wider text-white/80">
-            <button onClick={() => scrollTo('story')} className="hover:text-[#14f195] transition-colors cursor-pointer py-1">
+            <button
+              onClick={() => scrollTo("story")}
+              className="hover:text-[#14f195] transition-colors cursor-pointer py-1"
+            >
               About
             </button>
-            <button onClick={() => scrollTo('how-to-buy')} className="hover:text-[#14f195] transition-colors cursor-pointer py-1">
+            <button
+              onClick={() => scrollTo("how-to-buy")}
+              className="hover:text-[#14f195] transition-colors cursor-pointer py-1"
+            >
               How To Buy
             </button>
-            <button onClick={() => scrollTo('tokenomics')} className="hover:text-[#14f195] transition-colors cursor-pointer py-1">
+            <button
+              onClick={() => scrollTo("tokenomics")}
+              className="hover:text-[#14f195] transition-colors cursor-pointer py-1"
+            >
               Tokenomics
             </button>
-            <button onClick={() => scrollTo('memes')} className="hover:text-[#14f195] transition-colors cursor-pointer py-1">
+            <button
+              onClick={() => scrollTo("memes")}
+              className="hover:text-[#14f195] transition-colors cursor-pointer py-1"
+            >
               Memes
             </button>
-            <button onClick={() => scrollTo('community')} className="hover:text-[#14f195] transition-colors cursor-pointer py-1">
+            <button
+              onClick={() => scrollTo("community")}
+              className="hover:text-[#14f195] transition-colors cursor-pointer py-1"
+            >
               Community
             </button>
           </nav>
@@ -191,10 +209,14 @@ export default function App() {
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={handleToggleSound}
-              title={soundOn ? 'Sound On' : 'Muted'}
+              title={soundOn ? "Sound On" : "Muted"}
               className="p-1.5 sm:p-2 text-white/70 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
             >
-              {soundOn ? <Volume2 className="w-4 h-4 text-[#14f195]" /> : <VolumeX className="w-4 h-4" />}
+              {soundOn ? (
+                <Volume2 className="w-4 h-4 text-[#14f195]" />
+              ) : (
+                <VolumeX className="w-4 h-4" />
+              )}
             </motion.button>
 
             {/* Quick Copy CA Button (Tablet & Desktop) */}
@@ -204,8 +226,12 @@ export default function App() {
               onClick={handleCopyCA}
               className="hidden sm:inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-white font-mono text-xs font-semibold transition-colors cursor-pointer"
             >
-              {copied ? <Check className="w-3.5 h-3.5 text-[#14f195]" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copied ? 'Copied' : 'Copy CA'}</span>
+              {copied ? (
+                <Check className="w-3.5 h-3.5 text-[#14f195]" />
+              ) : (
+                <Copy className="w-3.5 h-3.5" />
+              )}
+              <span>{copied ? "Copied" : "Copy CA"}</span>
             </motion.button>
 
             {/* Buy Button */}
@@ -228,45 +254,71 @@ export default function App() {
               className="md:hidden p-1.5 text-white/80 hover:text-white rounded-lg hover:bg-white/10 focus:outline-none"
               aria-label="Toggle Navigation"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-[#14f195]" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6 text-[#14f195]" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
-
         </div>
 
         {/* Mobile Nav Drawer */}
         <AnimatePresence>
           {mobileMenuOpen && (
-            <motion.div 
+            <motion.div
               initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
+              animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25 }}
               className="md:hidden bg-[#130b09]/95 backdrop-blur-xl border-b border-[#14f195]/20 px-5 py-4 space-y-2.5 font-mono text-sm overflow-hidden shadow-2xl"
             >
-              <button onClick={() => scrollTo('story')} className="block w-full text-left py-2 px-2 rounded-lg text-white/90 hover:text-[#14f195] hover:bg-white/5 active:text-[#14f195]">
+              <button
+                onClick={() => scrollTo("story")}
+                className="block w-full text-left py-2 px-2 rounded-lg text-white/90 hover:text-[#14f195] hover:bg-white/5 active:text-[#14f195]"
+              >
                 About $LEON
               </button>
-              <button onClick={() => scrollTo('how-to-buy')} className="block w-full text-left py-2 px-2 rounded-lg text-white/90 hover:text-[#14f195] hover:bg-white/5 active:text-[#14f195]">
+              <button
+                onClick={() => scrollTo("how-to-buy")}
+                className="block w-full text-left py-2 px-2 rounded-lg text-white/90 hover:text-[#14f195] hover:bg-white/5 active:text-[#14f195]"
+              >
                 How To Buy
               </button>
-              <button onClick={() => scrollTo('tokenomics')} className="block w-full text-left py-2 px-2 rounded-lg text-white/90 hover:text-[#14f195] hover:bg-white/5 active:text-[#14f195]">
+              <button
+                onClick={() => scrollTo("tokenomics")}
+                className="block w-full text-left py-2 px-2 rounded-lg text-white/90 hover:text-[#14f195] hover:bg-white/5 active:text-[#14f195]"
+              >
                 Tokenomics
               </button>
-              <button onClick={() => scrollTo('memes')} className="block w-full text-left py-2 px-2 rounded-lg text-white/90 hover:text-[#14f195] hover:bg-white/5 active:text-[#14f195]">
+              <button
+                onClick={() => scrollTo("memes")}
+                className="block w-full text-left py-2 px-2 rounded-lg text-white/90 hover:text-[#14f195] hover:bg-white/5 active:text-[#14f195]"
+              >
                 Meme Gallery
               </button>
-              <button onClick={() => scrollTo('community')} className="block w-full text-left py-2 px-2 rounded-lg text-white/90 hover:text-[#14f195] hover:bg-white/5 active:text-[#14f195]">
+              <button
+                onClick={() => scrollTo("community")}
+                className="block w-full text-left py-2 px-2 rounded-lg text-white/90 hover:text-[#14f195] hover:bg-white/5 active:text-[#14f195]"
+              >
                 Community
               </button>
 
               <div className="pt-2 border-t border-white/10 space-y-2">
-                <button 
-                  onClick={handleCopyCA} 
+                <button
+                  onClick={handleCopyCA}
                   className="w-full py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/15 text-center text-xs font-bold text-[#14f195] flex items-center justify-center gap-2 min-h-[44px]"
                 >
-                  {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copied ? 'CA Copied to Clipboard!' : 'Copy Contract Address'}</span>
+                  {copied ? (
+                    <Check className="w-3.5 h-3.5" />
+                  ) : (
+                    <Copy className="w-3.5 h-3.5" />
+                  )}
+                  <span>
+                    {copied
+                      ? "CA Copied to Clipboard!"
+                      : "Copy Contract Address"}
+                  </span>
                 </button>
                 <a
                   href="https://raydium.io/swap/"
@@ -285,16 +337,16 @@ export default function App() {
       </motion.header>
 
       {/* 1. HERO SECTION: DESKTOP FULL-SCREEN SPACE & MOBILE COMPACTED RESPONSIVE */}
-      <section 
-        id="hero" 
+      <section
+        id="hero"
         className="relative w-full pt-16 sm:pt-20 md:pt-24 lg:pt-0 pb-8 sm:pb-12 md:pb-16 lg:pb-14 lg:min-h-screen lg:flex lg:flex-col lg:justify-end lg:items-center overflow-hidden bg-[#0b0604]"
       >
         {/* DESKTOP BACKGROUND: Takes up the entire desktop space edge-to-edge */}
         <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <img 
-            src={HERO_IMAGE} 
-            alt="$LEON Keynote on Solana" 
-            className="w-full h-full object-cover object-center" 
+          <img
+            src={HERO_IMAGE}
+            alt="$LEON Keynote on Solana"
+            className="w-full h-full object-cover object-center"
           />
           {/* Desktop cinematic gradient for text legibility */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#0b0604] via-[#0b0604]/55 to-black/20" />
@@ -302,21 +354,21 @@ export default function App() {
 
         {/* MOBILE & TABLET AMBIENT BACKDROP */}
         <div className="lg:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <img 
-            src={HERO_IMAGE} 
-            alt="" 
+          <img
+            src={HERO_IMAGE}
+            alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-25 scale-110" 
+            className="absolute inset-0 w-full h-full object-cover blur-3xl opacity-25 scale-110"
           />
           <div className="absolute inset-0 bg-[#08071a]/70" />
         </div>
 
         {/* MOBILE & TABLET COMPACTED KEYNOTE ARTWORK (Zero Zoom, Takes up natural space without box) */}
         <div className="lg:hidden relative z-1 w-full max-w-7xl mx-auto overflow-hidden aspect-[2560/1040]">
-          <img 
-            src={HERO_IMAGE} 
-            alt="$LEON Keynote on Solana" 
-            className="w-full h-full object-cover sm:object-contain object-center drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)]" 
+          <img
+            src={HERO_IMAGE}
+            alt="$LEON Keynote on Solana"
+            className="w-full h-full object-cover sm:object-contain object-center drop-shadow-[0_15px_40px_rgba(0,0,0,0.9)]"
           />
           {/* Seamless gradient blend into section content */}
           <div className="absolute inset-x-0 bottom-0 h-16 sm:h-24 md:h-36 bg-gradient-to-t from-[#0b0604] via-[#0b0604]/75 to-transparent pointer-events-none" />
@@ -324,15 +376,17 @@ export default function App() {
 
         {/* Hero Content */}
         <div className="relative z-10 w-full max-w-4xl mx-auto px-3.5 sm:px-6 -mt-8 sm:-mt-14 md:-mt-20 lg:mt-0 flex flex-col items-center space-y-3 sm:space-y-4 md:space-y-5">
-          
           {/* Live Solana Badge & Full Artwork Trigger */}
-          <motion.div variants={fadeInUp} className="flex items-center justify-center gap-2">
+          <motion.div
+            variants={fadeInUp}
+            className="flex items-center justify-center gap-2"
+          >
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#14f195]/20 border border-[#14f195]/40 text-[#14f195] font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider backdrop-blur-md shadow-lg">
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#14f195] animate-pulse"></span>
-              Live on Solana Mainnet
+              Coming soon on Solana Mainnet
             </span>
 
-            <button
+            {/* <button
               type="button"
               onClick={() => {
                 soundEffects.playPop();
@@ -343,11 +397,11 @@ export default function App() {
             >
               <Maximize2 className="w-3 h-3 text-[#14f195]" />
               <span>Full Artwork</span>
-            </button>
+            </button> */}
           </motion.div>
 
           {/* Headline */}
-          <motion.h1 
+          <motion.h1
             variants={fadeInUp}
             className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl font-black uppercase font-display text-white tracking-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] text-center"
           >
@@ -358,11 +412,13 @@ export default function App() {
             variants={fadeInUp}
             className="text-sm sm:text-lg md:text-xl text-white/95 max-w-2xl mx-auto font-medium drop-shadow-md px-2 text-center leading-relaxed"
           >
-            Taking the stage as the premier gecko meme on Solana. 100% LP burned, 0% tax, community owned.
+            Solana's finest chameleon
+            <div>Taking the stage as the premier gecko meme</div>
+            on Solana.
           </motion.p>
 
           {/* Action Buttons: Stacked on Mobile, Inline on Tablet/Desktop */}
-          <motion.div 
+          <motion.div
             variants={fadeInUp}
             className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-4 pt-2 sm:pt-4 w-full max-w-xs xs:max-w-sm sm:max-w-none mx-auto"
           >
@@ -397,7 +453,7 @@ export default function App() {
               <motion.a
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://t.me/petteryes"
+                href=""
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-xl bg-black/75 hover:bg-black/90 backdrop-blur-md border border-white/20 text-white hover:text-[#14f195] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
@@ -409,7 +465,7 @@ export default function App() {
               <motion.a
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://x.com/pacothealpaca_"
+                href="https://x.com/leonofsolana"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-xl bg-black/75 hover:bg-black/90 backdrop-blur-md border border-white/20 text-white hover:text-[#14f195] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
@@ -419,25 +475,26 @@ export default function App() {
               </motion.a>
             </div>
           </motion.div>
-
         </div>
       </section>
 
       {/* 2. THE STORY SECTION: ZEN LEON AT SOLANA FALLS */}
-      <section id="story" className="relative py-16 sm:py-24 border-t border-white/10 overflow-hidden">
+      <section
+        id="story"
+        className="relative py-16 sm:py-24 border-t border-white/10 overflow-hidden"
+      >
         {/* Section Image Background: Official Zen Leon Artwork */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <img 
-            src={STORY_ARTWORK} 
-            alt="Zen Leon at Waterfall" 
-            className="w-full h-full object-cover object-center" 
+          <img
+            src={STORY_ARTWORK}
+            alt="Zen Leon at Waterfall"
+            className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0b0604]/90 via-[#0b0604]/80 to-[#0b0604]/90 backdrop-blur-[2px]" />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-          
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
@@ -453,9 +510,8 @@ export default function App() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
-            
             {/* Left Div: Story Narrative */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
@@ -463,18 +519,24 @@ export default function App() {
               className="space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-base text-white/90 leading-relaxed font-normal bg-black/75 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/10 shadow-xl flex flex-col justify-center"
             >
               <p>
-                In the crowded arena of crypto, most tokens whisper from the shadows. Leon stepped straight onto the keynote stage in front of the world to deliver pure decentralization.
+                In the crowded arena of crypto, most tokens whisper from the
+                shadows. Leon stepped straight onto the keynote stage in front
+                of the world to deliver pure decentralization.
               </p>
               <p>
-                Backed by lightning-fast Solana throughput, $LEON represents the new wave of meme culture: fearless, transparent, and built for the community.
+                Backed by lightning-fast Solana throughput, $LEON represents the
+                new wave of meme culture: fearless, transparent, and built for
+                the community.
               </p>
               <p>
-                No hidden developer wallets, no surprise taxes. Just Leon, the mic, and an unstoppable crowd taking the Solana ecosystem by storm.
+                No hidden developer wallets, no surprise taxes. Just Leon, the
+                mic, and an unstoppable crowd taking the Solana ecosystem by
+                storm.
               </p>
             </motion.div>
 
             {/* Right Div: Core Principles */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
@@ -484,55 +546,67 @@ export default function App() {
               <div className="text-[#14f195] font-bold uppercase text-xs sm:text-sm tracking-wider border-b border-white/10 pb-2.5">
                 Core Principles
               </div>
-              
+
               <div className="space-y-3.5 pt-1">
                 <div className="flex items-start gap-2.5 sm:gap-3">
                   <span className="text-lg sm:text-xl shrink-0">🦎</span>
                   <div>
-                    <strong className="text-white block text-xs sm:text-sm">Keynote Presence</strong>
-                    <span className="text-white/70 text-[11px] sm:text-xs">Always in the spotlight. Built for viral Solana virality.</span>
+                    <strong className="text-white block text-xs sm:text-sm">
+                      Keynote Presence
+                    </strong>
+                    <span className="text-white/70 text-[11px] sm:text-xs">
+                      Always in the spotlight. Built for viral Solana virality.
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-2.5 sm:gap-3">
                   <span className="text-lg sm:text-xl shrink-0">⚡</span>
                   <div>
-                    <strong className="text-white block text-xs sm:text-sm">Solana Speed</strong>
-                    <span className="text-white/70 text-[11px] sm:text-xs">Sub-second finality with near-zero transaction costs.</span>
+                    <strong className="text-white block text-xs sm:text-sm">
+                      Solana Speed
+                    </strong>
+                    <span className="text-white/70 text-[11px] sm:text-xs">
+                      Sub-second finality with near-zero transaction costs.
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-2.5 sm:gap-3">
                   <span className="text-lg sm:text-xl shrink-0">💎</span>
                   <div>
-                    <strong className="text-white block text-xs sm:text-sm">Diamond Conviction</strong>
-                    <span className="text-white/70 text-[11px] sm:text-xs">Zero dev dump threat. 100% liquidity burned permanently.</span>
+                    <strong className="text-white block text-xs sm:text-sm">
+                      Diamond Conviction
+                    </strong>
+                    <span className="text-white/70 text-[11px] sm:text-xs">
+                      Zero dev dump threat. 100% liquidity burned permanently.
+                    </span>
                   </div>
                 </div>
               </div>
             </motion.div>
-
           </div>
-
         </div>
       </section>
 
       {/* 3. HOW TO BUY SECTION: $LEON SUNSET ROOFTOP BACKGROUND */}
-      <section id="how-to-buy" className="relative py-16 sm:py-24 border-t border-white/10 overflow-hidden">
+      <section
+        id="how-to-buy"
+        className="relative py-16 sm:py-24 border-t border-white/10 overflow-hidden"
+      >
         {/* Section Image Background: Official $LEON Sunset Rooftop Artwork */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <img 
-            src={HOW_TO_BUY_BG} 
-            alt="$LEON Sunset Rooftop Artwork" 
-            className="w-full h-full object-cover object-[center_35%] sm:object-center" 
+          <img
+            src={HOW_TO_BUY_BG}
+            alt="$LEON Sunset Rooftop Artwork"
+            className="w-full h-full object-cover object-[center_35%] sm:object-center"
           />
           {/* Subtle cinematic gradient so text and card stand out with high contrast while showcasing the art */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#0b0604]/80 via-[#0b0604]/60 to-[#0b0604]/85" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
-          
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
@@ -551,7 +625,7 @@ export default function App() {
           </motion.div>
 
           {/* Step Selector Tabs: 2x2 Grid on Mobile, 4 Columns on Tablet/Desktop */}
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
@@ -569,11 +643,13 @@ export default function App() {
                 }}
                 className={`p-2.5 sm:p-3 rounded-xl sm:rounded-2xl text-center border transition-all backdrop-blur-md cursor-pointer ${
                   activeStep === idx
-                    ? 'bg-[#14f195] text-[#0b0604] border-[#14f195] shadow-lg font-bold'
-                    : 'bg-black/50 text-white/80 hover:bg-black/70 hover:text-white border-white/15'
+                    ? "bg-[#14f195] text-[#0b0604] border-[#14f195] shadow-lg font-bold"
+                    : "bg-black/50 text-white/80 hover:bg-black/70 hover:text-white border-white/15"
                 }`}
               >
-                <div className={`text-[10px] sm:text-xs font-mono font-bold ${activeStep === idx ? 'text-[#0b0604]/80' : 'text-[#14f195]'}`}>
+                <div
+                  className={`text-[10px] sm:text-xs font-mono font-bold ${activeStep === idx ? "text-[#0b0604]/80" : "text-[#14f195]"}`}
+                >
                   STEP {step.num}
                 </div>
                 <div className="text-xs sm:text-sm font-extrabold uppercase font-display truncate">
@@ -584,7 +660,7 @@ export default function App() {
           </motion.div>
 
           {/* Active Step Showcase Card with Animated Switcher */}
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
@@ -592,7 +668,7 @@ export default function App() {
             className="bg-black/75 backdrop-blur-lg border border-[#14f195]/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl"
           >
             <AnimatePresence mode="wait">
-              <motion.div 
+              <motion.div
                 key={activeStep}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -600,10 +676,9 @@ export default function App() {
                 transition={{ duration: 0.3 }}
                 className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center"
               >
-                
                 {/* Step Image */}
                 <div className="md:col-span-6 flex justify-center">
-                  <motion.div 
+                  <motion.div
                     whileHover={{ scale: 1.02 }}
                     onClick={() => {
                       soundEffects.playPop();
@@ -659,7 +734,7 @@ export default function App() {
                     <button
                       onClick={() => {
                         soundEffects.playPop();
-                        setActiveStep(prev => Math.max(0, prev - 1));
+                        setActiveStep((prev) => Math.max(0, prev - 1));
                       }}
                       disabled={activeStep === 0}
                       className="flex items-center gap-1 text-white/70 hover:text-white disabled:opacity-30 cursor-pointer p-1"
@@ -667,14 +742,12 @@ export default function App() {
                       <ChevronLeft className="w-4 h-4" /> Previous
                     </button>
 
-                    <span className="text-white/40">
-                      {activeStep + 1} / 4
-                    </span>
+                    <span className="text-white/40">{activeStep + 1} / 4</span>
 
                     <button
                       onClick={() => {
                         soundEffects.playPop();
-                        setActiveStep(prev => Math.min(3, prev + 1));
+                        setActiveStep((prev) => Math.min(3, prev + 1));
                       }}
                       disabled={activeStep === 3}
                       className="flex items-center gap-1 text-[#14f195] hover:text-white disabled:opacity-30 font-bold cursor-pointer p-1"
@@ -682,36 +755,35 @@ export default function App() {
                       Next <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
-
                 </div>
-
               </motion.div>
             </AnimatePresence>
           </motion.div>
-
         </div>
       </section>
 
       {/* 4. TOKENOMICS SECTION: ANDES ROCK BEDROCK IMAGE BACKGROUND */}
-      <section id="tokenomics" className="relative py-16 sm:py-24 border-t border-white/10 overflow-hidden">
+      <section
+        id="tokenomics"
+        className="relative py-16 sm:py-24 border-t border-white/10 overflow-hidden"
+      >
         {/* Section Image Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <img 
-            src="/img/tokenomics/BGRocks.png" 
-            alt="Rock Bedrock" 
-            className="w-full h-full object-cover object-center" 
+          <img
+            src="/img/tokenomics/BGRocks.png"
+            alt="Rock Bedrock"
+            className="w-full h-full object-cover object-center"
           />
-          <img 
-            src="/img/tokenomics/Rocks.png" 
-            alt="Rocks" 
-            className="absolute top-0 inset-x-0 w-full h-32 object-cover object-top opacity-50" 
+          <img
+            src="/img/tokenomics/Rocks.png"
+            alt="Rocks"
+            className="absolute top-0 inset-x-0 w-full h-32 object-cover object-top opacity-50"
           />
           <div className="absolute inset-0 bg-[#0b0604]/80 backdrop-blur-[1px]"></div>
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
-          
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
@@ -730,7 +802,7 @@ export default function App() {
           </motion.div>
 
           {/* 4 Clean Metric Cards: 2 Columns on Mobile, 4 Columns on Tablet/Desktop */}
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
@@ -738,62 +810,91 @@ export default function App() {
             className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 mb-6 sm:mb-8"
           >
             {[
-              { label: "Total Supply", val: "1,000,000,000", sub: "1 Billion Fixed", color: "text-white" },
-              { label: "Buy / Sell Tax", val: "0% / 0%", sub: "Zero Hidden Fees", color: "text-[#14f195]" },
-              { label: "Liquidity", val: "100% BURNED", sub: "Locked Forever", color: "text-[#ff8b43]" },
-              { label: "Mint Authority", val: "REVOKED", sub: "Immutable SPL", color: "text-[#ffe066]" }
+              {
+                label: "Total Supply",
+                val: "1,000,000,000",
+                sub: "1 Billion Fixed",
+                color: "text-white",
+              },
+              {
+                label: "Buy / Sell Tax",
+                val: "0% / 0%",
+                sub: "Zero Hidden Fees",
+                color: "text-[#14f195]",
+              },
+              {
+                label: "Liquidity",
+                val: "100% BURNED",
+                sub: "Locked Forever",
+                color: "text-[#ff8b43]",
+              },
+              {
+                label: "Mint Authority",
+                val: "REVOKED",
+                sub: "Immutable SPL",
+                color: "text-[#ffe066]",
+              },
             ].map((metric, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
                 variants={fadeInUp}
                 whileHover={{ y: -5, scale: 1.02 }}
                 transition={{ duration: 0.2 }}
                 className="p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-black/65 backdrop-blur-md border border-white/15 text-center space-y-1 shadow-lg"
               >
-                <span className="text-[10px] sm:text-xs font-mono text-[#14f195] block">{metric.label}</span>
-                <span className={`text-base sm:text-xl md:text-2xl font-black font-mono block ${metric.color}`}>
+                <span className="text-[10px] sm:text-xs font-mono text-[#14f195] block">
+                  {metric.label}
+                </span>
+                <span
+                  className={`text-base sm:text-xl md:text-2xl font-black font-mono block ${metric.color}`}
+                >
                   {metric.val}
                 </span>
-                <span className="text-[9px] sm:text-[10px] text-white/50 font-mono">{metric.sub}</span>
+                <span className="text-[9px] sm:text-[10px] text-white/50 font-mono">
+                  {metric.sub}
+                </span>
               </motion.div>
             ))}
           </motion.div>
 
           {/* Clean Distribution Note */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-30px" }}
             transition={{ duration: 0.5, delay: 0.15 }}
             className="p-3 sm:p-4 rounded-xl bg-black/60 backdrop-blur-md border border-white/15 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-mono text-white/80 shadow-md text-center sm:text-left"
           >
-            <span className="text-[#14f195]">✓ Verified on Solana Blockchain</span>
+            <span className="text-[#14f195]">
+              ✓ Verified on Solana Blockchain
+            </span>
             <span>Ownership Renounced · Community Owned</span>
           </motion.div>
-
         </div>
       </section>
 
       {/* 5. MEMES GALLERY: CLOUDSCAPE & SUMMIT SKY IMAGE BACKGROUND */}
-      <section id="memes" className="relative py-16 sm:py-24 border-t border-white/10 overflow-hidden">
+      <section
+        id="memes"
+        className="relative py-16 sm:py-24 border-t border-white/10 overflow-hidden"
+      >
         {/* Section Image Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <img 
-            src="/img/born/Clouds.png" 
-            alt="Clouds" 
-            className="w-full h-full object-cover object-top opacity-30 mix-blend-screen" 
+          <img
+            src="/img/born/Clouds.png"
+            alt="Clouds"
+            className="w-full h-full object-cover object-top opacity-30 mix-blend-screen"
           />
-          <img 
-            src="/img/born/Ground.png" 
-            alt="Ground" 
-            className="absolute bottom-0 inset-x-0 w-full h-40 object-cover object-bottom opacity-40" 
+          <img
+            src="/img/born/Ground.png"
+            alt="Ground"
+            className="absolute bottom-0 inset-x-0 w-full h-40 object-cover object-bottom opacity-40"
           />
           <div className="absolute inset-0 bg-[#0b0604]/85 backdrop-blur-[1px]"></div>
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
-          
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
@@ -812,7 +913,7 @@ export default function App() {
           </motion.div>
 
           {/* 2 Columns on Mobile, 3 Columns on Tablet/Desktop */}
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-40px" }}
@@ -839,30 +940,31 @@ export default function App() {
               </motion.div>
             ))}
           </motion.div>
-
         </div>
       </section>
 
       {/* 6. JOIN THE COMMUNITY SECTION: SUNSET MOUNTAIN HORIZON IMAGE BACKGROUND */}
-      <section id="community" className="relative py-20 sm:py-28 border-t border-white/10 text-center overflow-hidden">
+      <section
+        id="community"
+        className="relative py-20 sm:py-28 border-t border-white/10 text-center overflow-hidden"
+      >
         {/* Section Image Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <img 
-            src="/img/join/Land.png" 
-            alt="Sunset Horizon" 
-            className="w-full h-full object-cover object-center" 
+          <img
+            src="/img/join/Land.png"
+            alt="Sunset Horizon"
+            className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080403] via-black/70 to-black/60 backdrop-blur-[1px]"></div>
         </div>
 
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
           variants={staggerContainer}
           className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 space-y-5 sm:space-y-6"
         >
-          
           <motion.div variants={fadeInUp} className="space-y-2">
             <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-[#14f195] font-bold">
               TAKE THE STAGE
@@ -871,19 +973,20 @@ export default function App() {
               Join The $LEON Community
             </h2>
             <p className="text-xs sm:text-sm md:text-base text-white/90 max-w-xl mx-auto drop-shadow-md">
-              Every legend begins with taking the stage. Connect with fellow holders across our official channels.
+              Every legend begins with taking the stage. Connect with fellow
+              holders across our official channels.
             </p>
           </motion.div>
 
           {/* Social Links: Stacked on Mobile, Inline on Tablet/Desktop */}
-          <motion.div 
+          <motion.div
             variants={fadeInUp}
             className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-4 pt-2 w-full max-w-sm sm:max-w-none mx-auto"
           >
             <motion.a
               whileHover={{ scale: 1.04, y: -2 }}
               whileTap={{ scale: 0.96 }}
-              href="https://t.me/petteryes"
+              href=""
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => soundEffects.playPop()}
@@ -896,7 +999,7 @@ export default function App() {
             <motion.a
               whileHover={{ scale: 1.04, y: -2 }}
               whileTap={{ scale: 0.96 }}
-              href="https://x.com/pacothealpaca_"
+              href="https://x.com/leonofsolana"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => soundEffects.playPop()}
@@ -919,7 +1022,6 @@ export default function App() {
               <ExternalLink className="w-3.5 h-3.5" />
             </motion.a>
           </motion.div>
-
         </motion.div>
       </section>
 
@@ -928,17 +1030,40 @@ export default function App() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-center sm:text-left">
           <div className="flex items-center gap-2">
             <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden border border-[#14f195]/40 bg-black">
-              <img src={HERO_IMAGE} alt="$LEON" className="w-full h-full object-cover object-[69%_28%]" />
+              <img
+                src={HERO_IMAGE}
+                alt="$LEON"
+                className="w-full h-full object-cover object-[69%_28%]"
+              />
             </div>
             <span className="text-white font-bold">$LEON ON SOLANA</span>
           </div>
 
           <div className="flex items-center gap-3 sm:gap-4">
-            <a href="https://t.me/petteryes" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1">Telegram</a>
+            <a
+              href=""
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white py-1"
+            >
+              Telegram
+            </a>
             <span>·</span>
-            <a href="https://x.com/pacothealpaca_" target="_blank" rel="noopener noreferrer" className="hover:text-white py-1">Twitter/X</a>
+            <a
+              href="https://x.com/leonofsolana"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white py-1"
+            >
+              Twitter/X
+            </a>
             <span>·</span>
-            <button onClick={handleCopyCA} className="hover:text-white cursor-pointer py-1">Copy CA</button>
+            <button
+              onClick={handleCopyCA}
+              className="hover:text-white cursor-pointer py-1"
+            >
+              Copy CA
+            </button>
           </div>
 
           <div className="text-white/40 text-[11px]">
@@ -950,7 +1075,7 @@ export default function App() {
       {/* LIGHTBOX MODAL: RESPONSIVE MOBILE SIZING & KEYNOTE ZOOM */}
       <AnimatePresence>
         {selectedMeme && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -958,7 +1083,7 @@ export default function App() {
             className="fixed inset-0 z-50 bg-black/92 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 cursor-pointer"
             onClick={() => setSelectedMeme(null)}
           >
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.9, opacity: 0, y: 15 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 15 }}
@@ -969,27 +1094,31 @@ export default function App() {
               <div className="relative rounded-xl overflow-hidden bg-black/80 flex items-center justify-center min-h-[220px]">
                 <img
                   src={selectedMeme}
-                  alt={selectedMeme === HERO_IMAGE ? "$LEON Keynote Presentation" : "Meme Preview"}
+                  alt={
+                    selectedMeme === HERO_IMAGE
+                      ? "$LEON Keynote Presentation"
+                      : "Meme Preview"
+                  }
                   className="w-full h-auto rounded-xl max-h-[68vh] object-contain mx-auto"
                 />
               </div>
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-1">
                 <span className="text-xs font-mono text-white/70 truncate">
-                  {selectedMeme === HERO_IMAGE 
-                    ? "Official Keynote Presentation ($LEON on Solana)" 
-                    : selectedMeme === HOW_TO_BUY_BG 
-                    ? "Official $LEON Sunset Rooftop Artwork" 
-                    : selectedMeme === STORY_ARTWORK
-                    ? "Zen Leon at Solana Falls Artwork"
-                    : selectedMeme === STEP_1_IMG
-                    ? "Step 01 Artwork: Create a Wallet ($LEON King)"
-                    : selectedMeme === STEP_2_IMG
-                    ? "Step 02 Artwork: Get Some SOL (Solana Orb)"
-                    : selectedMeme === STEP_3_IMG
-                    ? "Step 03 Artwork: Go to Raydium (Space Flight)"
-                    : selectedMeme === STEP_4_IMG
-                    ? "Step 04 Artwork: Swap for $LEON (Arcade DEX)"
-                    : "Official Community Meme"}
+                  {selectedMeme === HERO_IMAGE
+                    ? "Official Keynote Presentation ($LEON on Solana)"
+                    : selectedMeme === HOW_TO_BUY_BG
+                      ? "Official $LEON Sunset Rooftop Artwork"
+                      : selectedMeme === STORY_ARTWORK
+                        ? "Zen Leon at Solana Falls Artwork"
+                        : selectedMeme === STEP_1_IMG
+                          ? "Step 01 Artwork: Create a Wallet ($LEON King)"
+                          : selectedMeme === STEP_2_IMG
+                            ? "Step 02 Artwork: Get Some SOL (Solana Orb)"
+                            : selectedMeme === STEP_3_IMG
+                              ? "Step 03 Artwork: Go to Raydium (Space Flight)"
+                              : selectedMeme === STEP_4_IMG
+                                ? "Step 04 Artwork: Swap for $LEON (Arcade DEX)"
+                                : "Official Community Meme"}
                 </span>
                 <div className="flex items-center gap-2 shrink-0">
                   <motion.a
@@ -997,21 +1126,21 @@ export default function App() {
                     whileTap={{ scale: 0.95 }}
                     href={selectedMeme}
                     download={
-                      selectedMeme === HERO_IMAGE 
-                        ? "leon-solana-keynote.png" 
-                        : selectedMeme === HOW_TO_BUY_BG 
-                        ? "leon-sunset-rooftop.jpeg" 
-                        : selectedMeme === STORY_ARTWORK
-                        ? "zen-leon-solana-falls.jpeg"
-                        : selectedMeme === STEP_1_IMG
-                        ? "leon-step-1-wallet.jpeg"
-                        : selectedMeme === STEP_2_IMG
-                        ? "leon-step-2-sol.jpeg"
-                        : selectedMeme === STEP_3_IMG
-                        ? "leon-step-3-raydium.jpeg"
-                        : selectedMeme === STEP_4_IMG
-                        ? "leon-step-4-swap.jpeg"
-                        : "leon-meme.jpg"
+                      selectedMeme === HERO_IMAGE
+                        ? "leon-solana-keynote.png"
+                        : selectedMeme === HOW_TO_BUY_BG
+                          ? "leon-sunset-rooftop.jpeg"
+                          : selectedMeme === STORY_ARTWORK
+                            ? "zen-leon-solana-falls.jpeg"
+                            : selectedMeme === STEP_1_IMG
+                              ? "leon-step-1-wallet.jpeg"
+                              : selectedMeme === STEP_2_IMG
+                                ? "leon-step-2-sol.jpeg"
+                                : selectedMeme === STEP_3_IMG
+                                  ? "leon-step-3-raydium.jpeg"
+                                  : selectedMeme === STEP_4_IMG
+                                    ? "leon-step-4-swap.jpeg"
+                                    : "leon-meme.jpg"
                     }
                     className="flex-1 sm:flex-initial px-3.5 py-2 rounded-lg bg-[#14f195] text-[#0b0604] font-bold font-mono text-xs flex items-center justify-center gap-1.5 cursor-pointer min-h-[38px]"
                   >
@@ -1029,7 +1158,6 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
-
     </div>
   );
 }
