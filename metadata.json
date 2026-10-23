@@ -1,0 +1,6 @@
+{
+  "name": "LEON | Solana Web3 Meme Coin",
+  "description": "Official Web3 portal for $PACO: The Alpaca Who Kept Climbing on Solana. Featuring instant DEX swap, Paconomics, meme studio, clicker game, and the herd community.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
